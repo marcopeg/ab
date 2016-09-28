@@ -4,6 +4,14 @@ loadCards()
     .then(cards => populateCards(cards, 'cons'))
     .catch(e => console.error(e));
 
+$('#pros, #cons').sortable({
+    connectWith: '.x-cards',
+}).disableSelection();
+
+$('#pros').on('sortupdate', updateCardsPosition('pros'));
+$('#cons').on('sortupdate', updateCardsPosition('cons'));
+
+
 function loadCards() {
     return new Promise((resolve, reject) => {
         $.ajax({
@@ -26,6 +34,29 @@ function deleteCard(cardId) {
             success: resolve,
         });
     });
+}
+
+function updateCardsPosition(type) {
+    var $targetList = $('#' + type);
+    return () => {
+        var data = {
+            type: type,
+            cards: [],
+        }
+
+        $targetList.find('.x-card').each((pos, card) => {
+            data.cards.push($(card).attr('data-card-id'));
+        });
+
+        $.ajax({
+            method: 'put',
+            url: '/cards/sort',
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            dataType: 'json',
+            error: err => console.error(err),
+        });
+    };
 }
 
 function populateCards(cards, type) {
