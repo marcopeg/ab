@@ -9,25 +9,26 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 <body class="container">
-    <h4>Phase 1</h4>
-    <form action="/" method="POST">
-        <hr>
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid" style="margin: 15px auto">
+                <div class="col-xs-6">
+                    <button class="btn btn-danger btn-lg btn-block" type="submit" value="cons">
+                        <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
+                    </button>
+                </div>
+                <div class="col-xs-6 text-right">
+                    <button class="btn btn-success btn-lg btn-block" type="submit" value="pros">
+                        <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                    </button>
+                </div>
+        </div>
+    </nav>
+
+    <form action="/" method="POST" style="margin-top: 90px">
         <div class="row">
             <div class="col-xs-12">
                 <textarea class="form-control" rows="5" placeholder="New note..."></textarea>
-            </div>
-        </div>
-        <hr>
-        <div class="row">
-            <div class="col-xs-6">
-                <button class="btn btn-danger btn-lg btn-block" type="submit" value="Cons">
-                    <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
-                </button>
-            </div>
-            <div class="col-xs-6 text-right">
-                <button class="btn btn-success btn-lg btn-block" type="submit" value="Pro">
-                    <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-                </button
             </div>
         </div>
     </form>
