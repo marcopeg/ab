@@ -10,7 +10,8 @@ services:
         links:
             - db:db
         volumes:
-            - ./src:/usr/src/app
+            - ./src/api:/usr/src/app
+            - ./src/html:/usr/src/html
         ports:
             - 80:8080
         entrypoint: ["npm", "start"]

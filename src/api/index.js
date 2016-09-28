@@ -8,7 +8,7 @@ mongoose.connect('mongodb://db/qa');
 
 // server
 let app = express();
-app.use(express.static('./public'));
+app.use(express.static('/usr/src/html'));
 app.use(bodyParser.json());
-app.use('/', require('./routes/phase1'));
+app.use('/cards', require('./routes/cards'));
 app.listen(8080, () => console.log('Running 8080'));
