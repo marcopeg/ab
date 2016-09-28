@@ -21,3 +21,14 @@
 .x-card:hover .x-card-delete {
     display: block;
 }
+
+.x-card.active:hover .x-card-delete {
+    display: none;
+}
+
+#mergeCardsBtn {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    display: none;
+}

@@ -44,4 +44,33 @@ router.put('/sort', (req, res) => {
     .catch(err => res.status(500).send(err));
 });
 
+router.put('/merge', (req, res) => {
+    Card.find({ _id: { $in: req.body.cards } }).sort({ order: 1 })
+    // build new merged card
+    .then(cards => new Promise((resolve, reject) => {
+        var weight = 0;
+        var text = [];
+
+        cards.forEach(card => {
+            text.push(card.text);
+            weight += card.weight || 1;
+        });
+
+        var data = {
+            type: cards[0].type,
+            text: text.join('\n'),
+            weight: weight,
+        };
+
+        var merged = new Card(data);
+        merged.save()
+        .then(() => resolve(cards))
+        .catch(reject);
+    }))
+    // delete former cards
+    .then(cards => Card.remove({ _id: { $in: req.body.cards } }))
+    .then(() => res.send({ status: 'ok' }))
+    .catch(err => res.status(500).send(err));
+});
+
 module.exports = router;
