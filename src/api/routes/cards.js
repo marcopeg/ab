@@ -26,4 +26,10 @@ router.post('/', (req, res) => {
         .catch(err => res.send(err));
 });
 
+router.delete('/:id', (req, res) => {
+    Note.remove({ _id: req.params.id })
+    .then(() => res.send({ status: 'ok' }))
+    .catch(err => res.status(500).send(err));
+});
+
 module.exports = router;

@@ -27,7 +27,12 @@
     <script src="./review.js"></script>
 
     <template id="card-template">
-        <div class="list-group-item">{content}</div>
+        <div class="list-group-item x-card">
+            <div data-field="content"></div>
+            <button class="btn btn-danger btn-sm x-card-delete">
+                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+            </button>
+        </div>
     </template>
 </body>
 </html>
