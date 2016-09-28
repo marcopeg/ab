@@ -1,10 +1,8 @@
 
 const mongoose = require('mongoose');
 
-let Note = mongoose.model('Note', {
+module.exports = mongoose.model('Card', {
     text: String,
     type: String,
     order: Number,
 });
-
-module.exports = Note;
