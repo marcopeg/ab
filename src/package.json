@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "npm test",
-    "start": "supervisor index.js"
+    "start": "npm install && supervisor index.js"
   },
   "repository": {
     "type": "git",
