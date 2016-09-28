@@ -27,11 +27,30 @@
 
     <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="./review.js"></script>
 
     <template id="card-template">
         <div class="list-group-item x-card">
-            <div data-field="content"></div>
+            <div class="row">
+                <div class="col-xs-3">
+                    <select class="form-control  input-xs">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="5">5</option>
+                        <option value="8">8</option>
+                        <option value="13">13</option>
+                        <option value="20">20</option>
+                        <option value="40">40</option>
+                        <option value="100">100</option>
+                    </select>
+                </div>
+                <div class="col-xs-9">
+                    <div data-field="content"></div>
+                </div>
+            </div>
+
             <button class="btn btn-danger btn-sm x-card-delete">
                 <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
             </button>

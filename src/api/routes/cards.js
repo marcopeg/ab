@@ -23,6 +23,12 @@ router.delete('/:id', (req, res) => {
     .catch(err => res.status(500).send(err));
 });
 
+router.put('/:id', (req, res) => {
+    Card.update({ _id: req.params.id }, { $set: req.body })
+    .then(() => res.send({ status: 'ok' }))
+    .catch(err => res.send(err));
+})
+
 router.put('/sort', (req, res) => {
     var updateAll = [];
 
@@ -53,7 +59,7 @@ router.put('/merge', (req, res) => {
 
         cards.forEach(card => {
             text.push(card.text);
-            weight += card.weight || 1;
+            weight += parseInt(card.weight) || 1;
         });
 
         var data = {
