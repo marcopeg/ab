@@ -7,3 +7,17 @@
     font-size: 16px;
   }
 }
+
+
+.x-card {}
+
+.x-card-delete {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    display: none;
+}
+
+.x-card:hover .x-card-delete {
+    display: block;
+}
