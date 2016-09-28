@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
         // no empty cards or one word cards
         // (to be fixed by validation)
         .then(cards => cards.filter(card => card.text !== ''))
-        .then(cards => cards.filter(card => card.text.indexOf(' ') !== -1))
+        .then(cards => cards.filter(card => /\s/g.test(card.text)))
         // normalize card type
         .then(cards => cards.map(card => {
             card.type = card.type === 'Pro' ? 'pros' : 'cons';
