@@ -1,0 +1,18 @@
+#/bin/bash
+
+# runs a single app container in interactive mode
+# `run q1`
+#
+# by default "development" env file is mounted as volume
+# you can change this to another env file:
+# `run q1 production`
+
+SERVICE=${1:-q1}
+ENV_FILE=${2:-development}
+
+echo "Run Service: $SERVICE as $ENV_FILE"
+
+docker run --rm -it \
+    -v "$PWD"/services/$SERVICE:/usr/src/app \
+    -v "$PWD"/env/$ENV_FILE:/usr/src/app/test/.env \
+    marcopeg/node

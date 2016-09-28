@@ -1,0 +1,9 @@
+#
+# ./dev-mysql           # seed from mysql_backup/ncs.sql
+# ./dev-mysql seed foo  # seed from mysql_backup/foo.sql
+# ./dev-mysql dump      # dump to mysql_backup/ncs.sql
+# ./dev-mysql dump foo  # dump to mysql_backup/foo.sql
+#
+
+TARGET_SCRIPT="${1-seed}"
+docker-compose exec seed /bin/sh ./scripts/$TARGET_SCRIPT ${@:2}

@@ -1,0 +1,39 @@
+#
+# This script is supposed to be launched the first time we run a server
+# It boot the application and seed it with data from a backup
+#
+# ./prod-init file.sql http://new-server.com
+#
+
+
+WHICH_COMPOSE=./docker-compose.prod.yml
+SEEDING_DELAY=15
+SQL_FILE_NAME=$1
+TARGET_HOST=${2-http://localhost}
+
+# boot
+echo "---> Build Docker Images..."
+COMPOSE_FILE=${WHICH_COMPOSE} docker-compose build
+COMPOSE_FILE=${WHICH_COMPOSE} docker-compose up -d
+echo "---> Build Docker Images... OK"
+
+# Delay the seeding operation
+secs=$((SEEDING_DELAY * 1))
+while [ $secs -gt 0 ]; do
+   echo -ne "---> Seeding will start in $secs seconds...\033[0K\r"
+   sleep 1
+   : $((secs--))
+done
+echo ""
+
+# seeding
+./prod-mysql seed $SQL_FILE_NAME
+echo "---> Seeding database... OK"
+
+# migrate
+echo "---> Migrate WP to \"$TARGET_HOST\"..."
+./prod-mysql migrate http://ncscolour.com $TARGET_HOST
+./prod-mysql migrate http://ncs.demo.24hr.se $TARGET_HOST
+echo "---> Migrate WP to \"$TARGET_HOST\"... OK"
+
+COMPOSE_FILE=${WHICH_COMPOSE} docker-compose logs -f

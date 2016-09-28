@@ -1,0 +1,24 @@
+{
+  "name": "ab",
+  "version": "1.0.0",
+  "description": "decision making app",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test",
+    "start": "supervisor index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marcopeg/ab.git"
+  },
+  "author": "Marco Pegoraro",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marcopeg/ab/issues"
+  },
+  "homepage": "https://github.com/marcopeg/ab#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "mongoose": "^4.6.1"
+  }
+}

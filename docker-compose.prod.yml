@@ -1,0 +1,16 @@
+version: '2'
+services:
+    db:
+        image: mongo
+        volumes:
+            - ./data/db:/data/db
+
+    be:
+        image: marcopeg/node
+        links:
+            - db:db
+        volumes:
+            - ./src:/usr/src/app
+        ports:
+            - 80:8080
+        entrypoint: ["npm", "start"]
