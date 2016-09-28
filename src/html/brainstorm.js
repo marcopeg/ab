@@ -15,7 +15,7 @@ jQuery(document).delegate('form', 'submit', function(e) {
 
     $.ajax({
         method: 'post',
-        url: '?',
+        url: '/cards',
         contentType: 'application/json',
         data: JSON.stringify(data),
         dataType: 'json',
