@@ -1,11 +1,16 @@
 
-jQuery(document).delegate('form', 'submit', function(e) {
+// trigger form submit from buttons outside the form
+$(document).delegate('button[type=submit]', 'click', function(e) {
+    $('form').submit();
+});
+
+$(document).delegate('form', 'submit', function(e) {
     e.preventDefault();
     e.stopPropagation();
 
     var $form = $(this);
     var $textarea = $form.find('textarea');
-    var $submitBtn = $form.find('button[type=submit]:focus');
+    var $submitBtn = $(document).find('button[type=submit]:focus');
     $submitBtn.blur();
 
     let data = {
