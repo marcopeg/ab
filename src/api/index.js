@@ -15,9 +15,34 @@ app.get('/:pid',
     require('./middlewares/ensure-project'),
     require('./routes/project'));
 
-app.post('/:pid',
+app.get('/:pid/review',
     require('./middlewares/ensure-project'),
-    require('./routes/project-add-card'));
+    require('./middlewares/collect-orphan-cards'),
+    require('./routes/project-review'));
+
+app.get('/:pid/cards',
+    require('./middlewares/ensure-project'),
+    require('./routes/project-cards-get'));
+
+app.post('/:pid/cards',
+    require('./middlewares/ensure-project'),
+    require('./routes/project-cards-add'));
+
+app.delete('/:pid/cards/:cid',
+    require('./middlewares/ensure-project'),
+    require('./routes/project-cards-delete'));
+
+app.put('/:pid/cards/sort',
+    require('./middlewares/ensure-project'),
+    require('./routes/project-cards-sort'));
+
+app.put('/:pid/cards/merge',
+    require('./middlewares/ensure-project'),
+    require('./routes/project-cards-merge'));
+
+app.put('/:pid/cards/:cid',
+    require('./middlewares/ensure-project'),
+    require('./routes/project-cards-update'));
 
 app.get('/', require('./routes/home'));
 
