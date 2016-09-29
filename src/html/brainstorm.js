@@ -10,8 +10,13 @@
     $form.on('submit', e => {
         e.preventDefault();
         e.stopPropagation();
+    });
 
-        var $submitBtn = $form.find('button[type=submit]:focus');
+    $form.find('button[type=submit]').on('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        var $submitBtn = $(this);
 
         var data = {
             text: $textarea.val(),
