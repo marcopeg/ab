@@ -15,6 +15,7 @@
 
         var data = {
             question: $form.find('input[name=question]').val(),
+            pin: $form.find('input[name=pin]').val(),
         };
 
         var ajaxConf = {
