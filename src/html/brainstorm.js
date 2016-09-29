@@ -1,31 +1,37 @@
 
-// trigger form submit from buttons outside the form
-$(document).delegate('button[type=submit]', 'click', function(e) {
-    var $textarea = $('form').find('textarea');
-    var $submitBtn = $(this);
+/**
+ * Populate cards for a project
+ */
 
-    let data = {
-        text: $textarea.val(),
-        type: $submitBtn.val(),
-    };
+(function($) {
+    var $form = $('#project-brainstorm');
+    var $textarea = $form.find('textarea');
 
-    sendCard(data)
-    .then(() => $textarea.val('').focus())
-    .catch(err => console.error(err));
+    $form.on('submit', e => {
+        e.preventDefault();
+        e.stopPropagation();
 
-    $submitBtn.blur();
-});
+        var $submitBtn = $form.find('button[type=submit]:focus');
 
-function sendCard(data) {
-    return new Promise((resolve, reject) => {
-        $.ajax({
-            method: 'post',
-            url: '/cards',
+        var data = {
+            text: $textarea.val(),
+            type: $submitBtn.val(),
+        };
+
+        if (!data.text) {
+            return;
+        }
+
+        var ajaxConf = {
+            method: $form.attr('method'),
+            url: $form.attr('action'),
             contentType: 'application/json',
             data: JSON.stringify(data),
             dataType: 'json',
-            success: resolve,
-            error: reject,
-        });
+        };
+
+        $.ajax(ajaxConf)
+            .done(() => $textarea.val('').focus())
+            .fail((xhr, msg, err) => console.error(msg, err));
     });
-}
+})(jQuery)
