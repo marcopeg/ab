@@ -1,0 +1,63 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>AB - {{ pid }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body class="container" data-pid="{{ pid }}">
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h4>{{ question }}</h4>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div id="scene" style="margin-top:70px">loading...</div>
+
+    <template id="card-template">
+        <div class="x-play-card" style="border: 1px solid #ddd; background:#efefef; padding: 30px; margin-bottom:5px">
+            <span data-field="content"></span>
+        </div>
+    </template>
+
+    <template id="round-template">
+        <p>
+            Choose one option:
+        </p>
+        <hr>
+        <div class="row x-round">
+            <div class="col-sm-6" data-field="card1"></div>
+            <div class="col-sm-6" data-field="card2"></div>
+        </div>
+        <hr />
+        <div style="padding-top: 30px">
+            <button id="play-results" class="btn btn-primary btn-block">I'm done, let me see the results!</button>
+        </div>
+    </template>
+
+    <template id="results-template">
+        <div class="x-results">
+
+            <p>I give you <b>yes</b> at <b>{perc}%</b>!</p>
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: {perc}%;">
+                    <span class="sr-only">{perc}% Complete</span>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script src="/shuffle.js"></script>
+    <script src="/play.js"></script>
+
+</body>
+</html>
