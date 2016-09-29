@@ -22,6 +22,7 @@
         .then(() => render())
         .then(() => loadCards())
         .then(cards => cards.filter(card => card.text !== undefined))
+        .then(cards => cards.filter(card => ['pros', 'cons'].indexOf(card.type) !== -1))
         .then(cards => state.cards = cards)
         .then(() => computeScoreRange())
         .then(() => state.isPlaying = true)
