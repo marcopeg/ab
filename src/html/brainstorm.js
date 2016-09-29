@@ -39,4 +39,13 @@
             .done(() => $textarea.val('').focus())
             .fail((xhr, msg, err) => console.error(msg, err));
     });
+
+    new QRCode(document.getElementById('qrcode'), window.location.href);
+    $('#qrcode-box a').on('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        $(this).hide();
+        $('#qrcode-box .wrapper').fadeIn();
+    })
+    
 })(jQuery)
