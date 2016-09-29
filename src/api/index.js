@@ -45,6 +45,14 @@ app.put('/:pid/cards/:cid',
     require('./middlewares/ensure-project'),
     require('./routes/project-cards-update'));
 
+app.get('/:pid/settings',
+    require('./middlewares/ensure-project'),
+    require('./routes/project-settings'));
+
+app.put('/:pid/settings',
+    require('./middlewares/ensure-project'),
+    require('./routes/project-settings-save'));
+
 app.get('/', require('./routes/home'));
 app.post('/', require('./routes/project-create'));
 
