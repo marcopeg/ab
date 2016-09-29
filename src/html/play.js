@@ -89,8 +89,10 @@
     }
 
     function randomizeCards(cards) {
-        var randomized = window.knuthShuffle(cards.slice(0));
-        return [randomized[0], randomized[1]];
+        return window.knuthShuffle([
+            window.knuthShuffle(state.cards.filter(_ => _.type === 'pros')).shift(),
+            window.knuthShuffle(state.cards.filter(_ => _.type === 'cons')).shift(),
+        ]);
     }
 
     function buildRound(card1, card2) {
