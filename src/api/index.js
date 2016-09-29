@@ -10,6 +10,7 @@ mongoose.connect('mongodb://db/qa');
 let app = express();
 app.use(express.static('/usr/src/html'));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/:pid',
     require('./middlewares/ensure-project'),
@@ -45,5 +46,6 @@ app.put('/:pid/cards/:cid',
     require('./routes/project-cards-update'));
 
 app.get('/', require('./routes/home'));
+app.post('/', require('./routes/project-create'));
 
 app.listen(8080, () => console.log('Running 8080'));
