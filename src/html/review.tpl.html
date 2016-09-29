@@ -3,32 +3,46 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>AB / Review</title>
+    <title>AB - {{ pid }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="/style.css">
 </head>
-<body class="container">
+<body class="container" data-pid="{{ pid }}">
 
-    <div class="row">
-        <div class="col-xs-6">
-            <h4>Pros</h4>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h4>{{ question }}</h4>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="row" style="margin-top: 70px">
+        <div class="col-xs-12 col-sm-6">
+            <div class="text-center">
+                <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+            </div>
+
             <hr />
             <ul id="pros" class="list-group x-cards"></ul>
         </div>
-        <div class="col-xs-6">
-            <h4>Cons</h4>
+        <div class="col-xs-12 col-sm-6">
+            <div class="text-center">
+                <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
+            </div>
             <hr />
             <ul id="cons" class="list-group x-cards"></ul>
         </div>
     </div>
 
     <button id="mergeCardsBtn" class="btn">merge cards</button>
-
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="./review.js"></script>
 
     <template id="card-template">
         <div class="list-group-item x-card">
@@ -56,5 +70,10 @@
             </button>
         </div>
     </template>
+
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+    <script src="/review.js"></script>
+
 </body>
 </html>
