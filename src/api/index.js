@@ -53,6 +53,10 @@ app.put('/:pid/settings',
     require('./middlewares/ensure-project'),
     require('./routes/project-settings-save'));
 
+    app.get('/:pid/play',
+        require('./middlewares/ensure-project'),
+        require('./routes/project-play'));
+
 app.get('/', require('./routes/home'));
 app.post('/', require('./routes/project-create'));
 
