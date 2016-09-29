@@ -5,8 +5,6 @@
 const template = require('../utils/template');
 
 module.exports = (req, res, next) => {
-    console.log(req.project.pin);
-    console.log(req.session);
 
     if (!req.project.pin || req.session.pin === req.project.pin) {
         return next();
