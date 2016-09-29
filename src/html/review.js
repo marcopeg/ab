@@ -53,6 +53,20 @@ function deleteCard(cardId) {
     });
 }
 
+function updateCard(cardId, data) {
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            method: 'put',
+            url: '/cards/' + cardId,
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            dataType: 'json',
+            error: reject,
+            success: resolve,
+        });
+    });
+}
+
 function updateCardsPosition(type) {
     var $targetList = $('#' + type);
     return () => {
@@ -127,7 +141,17 @@ function makeCard(card) {
         .catch(err => console.error(err));
     });
 
+    // Handle select card
     $card.on('click', toggleCardSelection)
+
+    $card.find('select').on('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }).on('change', function(e) {
+        updateCard(card._id, {
+            weight: $(this).val(),
+        });
+    }).val(card.weight);
 
     return $card;
 }
@@ -153,7 +177,7 @@ function toggleCardSelection(e) {
         $card.removeClass('active');
     }
 
-    if (selectedCards.length) {
+    if (selectedCards.length > 1) {
         $('#mergeCardsBtn').fadeIn();
     } else {
         $('#mergeCardsBtn').fadeOut();
