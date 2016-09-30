@@ -13,8 +13,11 @@
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="row">
-                <div class="col-xs-12">
+                <div class="col-xs-10">
                     <h4>{{ question }}</h4>
+                </div>
+                <div class="col-xs-2">
+                    <button id="mergeCardsBtn" class="btn btn-primary btn-block">merge cards</button>
                 </div>
             </div>
         </div>
@@ -22,57 +25,43 @@
 
     <div class="row" style="margin-top: 70px">
         <div class="col-xs-12 col-sm-6">
-            <div class="text-center">
-                <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-                <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-                <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-            </div>
-
-            <hr />
-            <ul id="pros" class="list-group x-cards"></ul>
+            <ul id="pros" class="x-cards"></ul>
         </div>
         <div class="col-xs-12 col-sm-6">
-            <div class="text-center">
-                <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
-                <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
-                <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
-            </div>
-            <hr />
-            <ul id="cons" class="list-group x-cards"></ul>
+            <ul id="cons" class="x-cards"></ul>
         </div>
     </div>
 
-    <button id="mergeCardsBtn" class="btn">merge cards</button>
-
     <template id="card-template">
-        <div class="list-group-item x-card">
-            <div class="row">
-                <div class="col-xs-3">
-                    <select class="form-control  input-xs">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="5">5</option>
-                        <option value="8">8</option>
-                        <option value="13">13</option>
-                        <option value="20">20</option>
-                        <option value="40">40</option>
-                        <option value="100">100</option>
-                    </select>
-                </div>
-                <div class="col-xs-9">
-                    <div data-field="content"></div>
+        <div class="x-card">
+            <p class="lead" data-field="content"></p>
+            <div class="text-right">
+                <div class="btn-group btn-group-xs" role="group" aria-label="Card actions">
+                    <div class="btn-group btn-group-xs x-weight-control" role="group">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span data-field="weight"></span>
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu"></ul>
+                    </div>
+                    <a class="btn btn-default x-move-handle">
+                        <span class="glyphicon glyphicon-move" aria-hidden="true"></span>
+                    </a>
+                    <a class="btn btn-default x-select-handle">
+                        <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+                    </a>
+                    <a class="btn btn-default x-delete-handle">
+                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                    </a>
                 </div>
             </div>
 
-            <button class="btn btn-danger btn-sm x-card-delete">
-                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-            </button>
         </div>
     </template>
 
     <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="/review.js"></script>
 
 </body>

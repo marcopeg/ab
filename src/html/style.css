@@ -8,27 +8,27 @@
   }
 }
 
+.x-cards {
+    padding: 10px 5px;
+    background: #efefef;
+}
+#pros { background: #f3f9ef; }
+#cons { background: #f9f2ef; }
 
-.x-card {}
-
-.x-card-delete {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    display: none;
+.x-card {
+    margin: 0 5px 10px;
+    border: 1px solid #bbb;
+    border-radius: 3px;
+    padding: 10px;
+    background: #fff;
+}
+.x-card.active {
+    border-color: green;
+    box-shadow: 0 0 10px #555;
 }
 
-.x-card:hover .x-card-delete {
-    display: block;
-}
-
-.x-card.active:hover .x-card-delete {
-    display: none;
-}
 
 #mergeCardsBtn {
-    position: fixed;
-    bottom: 10px;
-    right: 10px;
+    margin-top: 7px;
     display: none;
 }
