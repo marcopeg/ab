@@ -17,6 +17,7 @@
      */
 
     $('#pros, #cons').sortable({
+        handle: '.x-move-handle',
         connectWith: '.x-cards',
     }).disableSelection();
 
@@ -137,25 +138,33 @@
         fill($card, 'content', card.text);
 
         // handle remove card
-        $card.find('.x-card-delete').on('click', function(e) {
+        $card.find('.x-delete-handle').on('click', function(e) {
             e.preventDefault();
             e.stopPropagation();
+
+            if (!confirm('Confirm?')) {
+                return;
+            }
+
             deleteCard(card._id)
                 .then($card.fadeOut())
                 .catch(err => console.error(err));
         });
 
         // Handle select card
-        $card.on('click', toggleCardSelection)
+        $card.find('.x-select-handle').on('click', toggleCardSelection)
 
-        $card.find('select').on('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-        }).on('change', function(e) {
-            updateCard(card._id, {
-                weight: $(this).val(),
-            });
-        }).val(card.weight);
+        // weight control
+        var $weight = $card.find('.x-weight-control');
+        $weight.find('[data-field=weight]').html(card.weight);
+        [1, 2, 3, 5, 8, 13, 20, 40, 100].forEach(val => {
+            $weight.find('.dropdown-menu').append($('<li><a href="#" data-value="'+val+'">'+val+'</a></li>'))
+        });
+        $weight.find('a').on('click', function(e) {
+            var val = $(this).attr('data-value');
+            $weight.find('[data-field=weight]').html(val);
+            updateCard(card._id, { weight: val });
+        });
 
         return $card;
     }
@@ -170,15 +179,17 @@
         e.preventDefault();
         e.stopPropagation();
 
-        var $card = $(this);
+        var $card = $(this).parents('.x-card');
         var cardId = $card.attr('data-card-id');
 
         if (selectedCards.indexOf(cardId) === -1) {
             selectedCards.push(cardId);
             $card.addClass('active');
+            $card.find('.x-select-handle').addClass('btn-primary');
         } else {
             selectedCards.splice(selectedCards.indexOf(cardId), 1);
             $card.removeClass('active');
+            $card.find('.x-select-handle').removeClass('btn-primary');
         }
 
         if (selectedCards.length > 1) {
