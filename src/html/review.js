@@ -2,11 +2,11 @@
 (function($) {
 
     var pid = $('body').attr('data-pid');
+    var editContext = {};
 
     /**
      * Fetch Cards and initialise the board
      */
-
 
     fetchCards();
     $('#mergeCardsBtn').on('click', mergeCards);
@@ -24,6 +24,23 @@
     $('#pros').on('sortupdate', updateCardsPosition('pros'));
     $('#cons').on('sortupdate', updateCardsPosition('cons'));
 
+
+    /**
+     * Init
+     */
+
+    $('body').on('keyup', function(e){
+        if (e.which == 27 && editContext.$card) {
+            editContext.$card.find('textarea').hide().remove();
+            editContext.$card.find('.x-content-handle').show();
+            editContext = {};
+            return;
+        }
+        if (e.which == 13 && (e.metaKey || e.ctrlKey)) {
+            commitEditContext();
+            return;
+        }
+    });
 
     function fetchCards() {
         $('#pros, #cons').empty();
@@ -154,7 +171,7 @@
         // Handle select card
         $card.find('.x-select-handle').on('click', toggleCardSelection)
 
-        // weight control
+        // Weight control
         var $weight = $card.find('.x-weight-control');
         $weight.find('[data-field=weight]').html(card.weight);
         [1, 2, 3, 5, 8, 13, 20, 40, 100].forEach(val => {
@@ -165,6 +182,25 @@
             $weight.find('[data-field=weight]').html(val);
             updateCard(card._id, { weight: val });
         });
+
+        // Edit card
+        $card.find('.x-content-handle').on('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            commitEditContext();
+            $(this).hide();
+            var lines = card.text.match(/[^\r\n]+/g);
+            var $txt = $('<textarea class="form-control" rows="'+lines.length+'">');
+            $(this).after($txt);
+            $txt.focus().val(card.text).on('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+            });
+            editContext.card = card;
+            editContext.$card = $card;
+        });
+
+        $card.on('click', commitEditContext);
 
         return $card;
     }
@@ -197,6 +233,17 @@
         } else {
             $('#mergeCardsBtn').fadeOut();
         }
+    }
+
+    function commitEditContext() {
+        if (!editContext.card) {
+            return;
+        }
+        editContext.card.text = editContext.$card.find('textarea').val();
+        updateCard(editContext.card._id, { text: editContext.card.text });
+        editContext.$card.find('textarea').hide().remove();
+        editContext.$card.find('.x-content-handle').html(editContext.card.text.replace(/\n/g, "<br />")).show();
+        editContext = {};
     }
 
 

@@ -26,6 +26,9 @@
     border-color: green;
     box-shadow: 0 0 10px #555;
 }
+.x-card textarea {
+    margin-bottom: 10px;
+}
 
 
 #mergeCardsBtn {
